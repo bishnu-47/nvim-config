@@ -2,7 +2,7 @@
 Minimal nvim config for MERN stack and java development.
 
 ### How to setup:
-First make sure you and [nvim nightly](https://github.com/neovim/neovim/releases)  and git installed... then
+First make sure you have [nvim nightly](https://github.com/neovim/neovim/releases)  and git installed... then
 
 `cd ~/.config`
 
