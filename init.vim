@@ -6,22 +6,29 @@
 :set smarttab
 :set softtabstop=4
 :set mouse=a
+:set clipboard=unnamedplus
+let mapleader = "," " map leader to comma
 
 call plug#begin()
 
-Plug 'http://github.com/tpope/vim-surround' " Surrounding ysw)
-Plug 'https://github.com/preservim/nerdtree' " NerdTree
-Plug 'https://github.com/tpope/vim-commentary' " For Commenting gcc & gc
-Plug 'https://github.com/vim-airline/vim-airline' " Status bar
-Plug 'https://github.com/ap/vim-css-color' " CSS Color Preview
-Plug 'https://github.com/rafi/awesome-vim-colorschemes' " Retro Scheme
-Plug 'https://github.com/neoclide/coc.nvim'  " Auto Completion
-Plug 'https://github.com/ryanoasis/vim-devicons' " Developer Icons
-Plug 'https://github.com/tc50cal/vim-terminal' " Vim Terminal
-Plug 'https://github.com/preservim/tagbar' " Tagbar for code navigation
-Plug 'https://github.com/terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
+Plug 'tpope/vim-surround' " Surrounding ysw)
+Plug 'preservim/nerdtree' " NerdTree
+Plug 'tpope/vim-commentary' " For Commenting gcc & gc
+Plug 'vim-airline/vim-airline' " Status bar
+Plug 'ap/vim-css-color' " CSS Color Preview
+Plug 'rafi/awesome-vim-colorschemes' " Retro Scheme
+Plug 'neoclide/coc.nvim'  " Auto Completion
+Plug 'ryanoasis/vim-devicons' " Developer Icons
+Plug 'tc50cal/vim-terminal' " Vim Terminal
+Plug 'preservim/tagbar' " Tagbar for code navigation
+Plug 'terryma/vim-multiple-cursors' " CTRL + N for multiple cursors
 Plug 'sheerun/vim-polyglot' " enhanced syntax highlighting
 Plug 'Chiel92/vim-autoformat' " syntax formatter
+Plug 'wakatime/vim-wakatime' " wakatime to track coding time
+Plug 'jiangmiao/auto-pairs' " auto close brackets
+Plug 'junegunn/fzf.vim' " fuzzy file finder
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'mattn/emmet-vim' " emmet 
 
 set encoding=UTF-8
 
@@ -35,25 +42,28 @@ noremap <F3> :Autoformat<CR>
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
+
+
+" coc
 nnoremap <C-l> :call CocActionAsync('jumpDefinition')<CR>
 
+" tagbar
 nmap <F8> :TagbarToggle<CR>
 
 :set completeopt-=preview " For No Previews
 
 :colorscheme PaperColor
 
-" let g:NERDTreeDirArrowExpandable="+"
-" let g:NERDTreeDirArrowCollapsible="~"
-
-" --- Just Some Notes ---
-" :CocCommand snippets.edit... FOR EACH FILE TYPE
 
 " vim-autoformat
 let g:python3_host_prog="/usr/bin/python3"
-"
+
 " air-line
 let g:airline_powerline_fonts = 1
+"
+" PLUGIN: FZF
+nnoremap <silent> <Leader>b :Buffers<CR>
+nnoremap <silent> <Leader>f :GFiles<CR>
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -80,20 +90,20 @@ func! CompileRunGcc()
     elseif &filetype == 'cpp'
         exec "!g++ % -o %<"
         exec "!time ./%<"
-    elseif &filetype == 'java' 
-        exec "!javac -d ./classes %" 
+    elseif &filetype == 'java'
+        exec "!javac -d ./classes %"
         exec "!time java -cp ./classes %<"
     elseif &filetype == 'sh'
         :!time bash %
     elseif &filetype == 'python'
         exec "!time python2.7 %"
     elseif &filetype == 'html'
-        exec "!firefox % &"
+        exec "!brave-browser % &"
     elseif &filetype == 'go'
         exec "!go build %<"
         exec "!time go run %"
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!firefox %.html &"
+        exec "!brave-browser %.html &"
     endif
-endfunc 
+endfunc
