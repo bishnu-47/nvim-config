@@ -7,6 +7,7 @@
 :set softtabstop=4
 :set mouse=a
 :set clipboard=unnamedplus
+:set foldmethod=syntax
 let mapleader = "," " map leader to comma
 
 call plug#begin()
@@ -29,6 +30,8 @@ Plug 'jiangmiao/auto-pairs' " auto close brackets
 Plug 'junegunn/fzf.vim' " fuzzy file finder
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'mattn/emmet-vim' " emmet 
+Plug 'SirVer/ultisnips' " snippets
+Plug 'honza/vim-snippets' " snippets
 
 set encoding=UTF-8
 
@@ -42,6 +45,11 @@ noremap <F3> :Autoformat<CR>
 nnoremap <C-f> :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
+
+" vim-snippets
+let g:UltiSnipsExpandTrigger="<S-Tab>"
+" list all snippets for current filetype
+let g:UltiSnipsListSnippets="<c-l>"
 
 
 " coc
